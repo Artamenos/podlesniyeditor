@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  background: #080b12;
+  color: #f5f7ff;
+  font-family: Arial, sans-serif;
+}
+
+body { margin: 0; }

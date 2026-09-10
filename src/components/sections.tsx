@@ -1,6 +1,7 @@
-import { ArrowLeft, ArrowRight, ArrowUp, ArrowUpRight, UserRound } from "lucide-react";
+import { ArrowUp, ArrowUpRight, UserRound } from "lucide-react";
 import { about, reviews, site } from "@/data/content";
 import { SectionHeading, TextLines } from "./ui";
+import { Carousel } from "./carousel";
 
 export function About() {
   return <section className="section about-section" id="about" aria-labelledby="about-title">
@@ -16,17 +17,17 @@ export function About() {
 }
 export function Reviews() {
   return <section className="section reviews-section" id="reviews" aria-labelledby="reviews-title"><div className="container section-rule">
-    <SectionHeading id="reviews-title" label="04 / ОБРАТНАЯ СВЯЗЬ" title="Отзывы клиентов" aside={<div className="carousel-controls"><span className="button button-secondary button-icon"><ArrowLeft size={18} /></span><span className="button button-primary button-icon"><ArrowRight size={18} /></span></div>} />
-    <div className="carousel-track reviews-track" tabIndex={0} aria-label="Отзывы — прокрутите вправо">{reviews.map(review => <article className="review-card" key={review.id}>
+    <Carousel className="reviews" label="Отзывы" count={reviews.length} toolbar={<SectionHeading id="reviews-title" label="04 / ОБРАТНАЯ СВЯЗЬ" title="Отзывы клиентов" />}>
+    {reviews.map(review => <article className="review-card" key={review.id}>
       <span className="quote-mark" aria-hidden="true">“</span>{review.quote ? <blockquote>{review.quote}</blockquote> : <div className="review-placeholder"><p>Здесь будет отзыв о работе</p><TextLines lines={3} /></div>}
-      <div className="review-author"><span className="avatar-placeholder"><UserRound size={18} aria-hidden="true" /></span><div><p>{review.author ?? "Имя клиента"}</p><span>{review.detail ?? "Проект / компания"}</span></div>{review.url ? <a href={review.url} target="_blank" rel="noopener noreferrer" aria-label={`Источник отзыва ${review.author ?? "клиента"}`}><ArrowUpRight size={18} aria-hidden="true" /></a> : null}</div>
-    </article>)}</div>
-    <div className="carousel-footer"><div className="carousel-progress"><span /></div><span className="eyebrow">ЛИСТАЙТЕ <ArrowRight size={16} aria-hidden="true" /></span></div>
+      <div className="review-author"><span className="avatar-placeholder"><UserRound size={18} aria-hidden="true" /></span><div><p>{review.author ?? "Имя клиента"}</p>{review.detail && <span>{review.detail}</span>}</div>{review.url ? <a href={review.url} target="_blank" rel="noopener noreferrer" aria-label={`Источник отзыва ${review.author ?? "клиента"}`}><ArrowUpRight size={18} aria-hidden="true" /></a> : null}</div>
+    </article>)}
+    </Carousel>
   </div></section>;
 }
 export function Contact() {
   return <section className="section contact-section" id="contact" aria-labelledby="contact-title">
-    <div className="glow contact-glow" aria-hidden="true" /><div className="container section-rule">
+    <div className="glow contact-glow" data-parallax aria-hidden="true" /><div className="container section-rule">
       <p className="eyebrow contact-label">05 / КОНТАКТЫ</p><div className="contact-grid"><div><h2 className="display" id="contact-title">Обсудим<br />ваш проект?</h2><p className="contact-description">Пишите по любым вопросам — отвечу быстро.</p></div>
       <div className="contact-links"><a className="contact-card" href={`mailto:${site.email}`}><span><span className="eyebrow">ПОЧТА</span><span className="contact-email">{site.email}</span></span><ArrowUpRight size={24} aria-hidden="true" /></a><a className="contact-card telegram-card" href={site.telegram} target="_blank" rel="noopener noreferrer"><span><span className="eyebrow">НАПИСАТЬ</span><span className="contact-telegram">Telegram</span></span><ArrowUpRight size={24} aria-hidden="true" /></a><p>Выберите удобный способ связи</p></div></div>
     </div>

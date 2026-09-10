@@ -1,9 +1,10 @@
+import { Hero, ShortsLibrary, WorkLibrary } from "@/components/portfolio";
+import { About, Contact, Footer, Reviews } from "@/components/sections";
+
 export default function Home() {
-  return (
-    <main className="mx-auto flex min-h-screen max-w-7xl flex-col justify-center gap-4 px-6">
-      <p className="text-sm tracking-[0.2em] text-slate-400">АЛЕКСЕЙ / VIDEO EDITOR</p>
-      <h1 className="text-5xl font-bold">Видеомонтажёр</h1>
-      <p className="text-slate-400">Портфолио готовится к запуску.</p>
-    </main>
-  );
+  return <div className="site-shell" id="top">
+    <a className="skip-link button button-primary" href="#works">Перейти к работам</a>
+    <main><Hero /><WorkLibrary /><ShortsLibrary /><About /><Reviews /><Contact /></main>
+    <Footer />
+  </div>;
 }

@@ -38,3 +38,10 @@ for (const page of pages) {
     }
   });
 }
+
+test("Timeweb directory index and 404 are included in the export", () => {
+  const config = readFileSync("out/.htaccess", "utf8");
+  assert.match(config, /^DirectoryIndex index\.html$/m);
+  assert.match(config, /^ErrorDocument 404 \/404\.html$/m);
+  assert.ok(existsSync("out/404.html"));
+});

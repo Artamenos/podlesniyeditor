@@ -1,0 +1,72 @@
+name: Site checks and Timeweb deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: Upload the checked site to Timeweb
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Check and export RU + EN
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run test:export
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: site-static
+          path: out/
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 14
+
+  deploy:
+    name: Upload static files to Timeweb
+    needs: build
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: timeweb
+    concurrency:
+      group: timeweb-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5
+        with:
+          name: site-static
+          path: out
+      - name: Upload over SSH
+        env:
+          TIMEWEB_HOST: ${{ vars.TIMEWEB_HOST }}
+          TIMEWEB_USER: ${{ vars.TIMEWEB_USER }}
+          TIMEWEB_PORT: ${{ vars.TIMEWEB_PORT || '22' }}
+          TIMEWEB_PATH: ${{ vars.TIMEWEB_PATH }}
+          TIMEWEB_SSH_KEY: ${{ secrets.TIMEWEB_SSH_KEY }}
+          TIMEWEB_KNOWN_HOSTS: ${{ secrets.TIMEWEB_KNOWN_HOSTS }}
+        run: bash scripts/deploy-timeweb.sh

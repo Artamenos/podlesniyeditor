@@ -1,7 +1,7 @@
 import { ArrowDown } from "lucide-react";
 import { showreel, site } from "@/data/content";
 import { Header } from "./navigation";
-import { SectionHeading, TextLines } from "./ui";
+import { SectionHeading } from "./ui";
 import { Showreel } from "./video-card";
 import { ShortsGallery, WorkGallery } from "./gallery";
 
@@ -10,7 +10,7 @@ export function Hero() {
     <div className="glow hero-glow" data-parallax aria-hidden="true" /><div className="glow hero-corner-glow" aria-hidden="true" />
     <Header /><div className="hero-content container">
       <p className="eyebrow">ПОРТФОЛИО / VIDEO EDITOR</p><h1 className="display" id="hero-title">Видеомонтажёр</h1>
-      <TextLines className="hero-description" />
+      <p className="hero-description">{site.tagline}</p>
       <a className="hero-mobile-contact link-muted" href={`mailto:${site.email}`}>{site.email}</a>
       <div className="showreel"><Showreel item={showreel} /></div>
       <a className="hero-next eyebrow" href="#works">ИЗБРАННЫЕ РАБОТЫ<ArrowDown size={16} aria-hidden="true" /></a>

@@ -13,6 +13,7 @@ export type VideoItem = {
   poster: string | null; orientation: "landscape" | "portrait";
 };
 export const site = {
+  tagline: "Превращаю отснятый материал в истории, которые хочется досмотреть.",
   name: "Алексей", email: "arrlex2000@gmail.com", telegram: "https://t.me/salty322",
   navigation: [
     { label: "Работы", href: "#works" }, { label: "О себе", href: "#about" },
@@ -45,7 +46,7 @@ export const reviews: Review[] = [
 ];
 export type AboutIcon = { name: string; src: string };
 export const about: { text: string | null; skills: AboutIcon[]; tools: AboutIcon[]; platforms: AboutIcon[] } = {
-  text: "Меня зовут Алексей, и я профессиональный видеомонтажёр с 5-летним опытом!\nНа этом канале вы можете увидеть мои работы, а возможно, и влоги или руководства.\nСейчас я собираю креативные ролики в DaVinci Resolve, раньше много работал в Adobe Premiere Pro и немного в After Effects. Motion-графику в основном делаю в DaVinci Resolve Fusion, некоторые задачи — в After Effects.\nСайты пока пишу на HTML, CSS и JavaScript.",
+  text: "Профессиональный видеомонтажёр с 5-летним опытом.\nНа этом канале вы можете увидеть мои работы, а возможно, и влоги или руководства.\nСейчас я собираю креативные ролики в DaVinci Resolve, раньше много работал в Adobe Premiere Pro и немного в After Effects. Motion-графику в основном делаю в DaVinci Resolve Fusion, некоторые задачи — в After Effects.\nСайты пока пишу на HTML, CSS и JavaScript.",
   skills: [
     { name: "HTML", src: "/media/icon/image 8.png" },
     { name: "CSS", src: "/media/icon/image 9.png" },

@@ -11,7 +11,7 @@ export function WorkGallery() {
   const [limit, setLimit] = useState(6);
   const filtered = works.filter(item => category === "Все работы" || item.category === category);
   return <>
-    <div className="filters" role="group" aria-label="Категории работ">{(["Все работы", "YouTube", "Реклама", "Интервью"] as const).map(name => <button type="button" key={name} className={`button ${category === name ? "button-primary" : "button-secondary"}`} aria-pressed={category === name} onClick={() => { setCategory(name); setLimit(6); }}>{name}</button>)}</div>
+    <div className="filters" role="group" aria-label="Категории работ">{(["Все работы", "YouTube", "Реклама", "Подкасты"] as const).map(name => <button type="button" key={name} className={`button ${category === name ? "button-primary" : "button-secondary"}`} aria-pressed={category === name} onClick={() => { setCategory(name); setLimit(6); }}>{name}</button>)}</div>
     <p className="sr-only" role="status">Показано {Math.min(limit, filtered.length)} из {filtered.length} работ</p>
     <div className="work-grid">{filtered.slice(0, limit).map((item, index) => <VideoCard key={item.id} item={item} index={index} />)}</div>
     {limit < filtered.length && <div className="load-more"><button className="button button-secondary" type="button" onClick={() => setLimit(limit + 6)}>Показать ещё<ArrowDown size={16} aria-hidden="true" /></button></div>}

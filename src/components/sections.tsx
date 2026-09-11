@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ArrowUp, ArrowUpRight, UserRound } from "lucide-react";
 import { about, reviews, site } from "@/data/content";
 import { SectionHeading, TextLines } from "./ui";
@@ -8,10 +9,10 @@ export function About() {
     <div className="glow about-glow" aria-hidden="true" /><div className="container section-rule">
       <div className="about-grid"><div className="about-copy">
         <SectionHeading id="about-title" label="03 / ОБО МНЕ" title="О себе" /><h3>{site.name}</h3>
-        {about.text ? <p className="about-description">{about.text}</p> : <div className="about-description"><p>Здесь будет несколько слов обо мне, моём подходе к монтажу и работе с проектами.</p><TextLines lines={2} /></div>}
+        {about.text ? <div className="about-description">{about.text.split("\n").map((paragraph, index) => <p className={index === 0 ? "about-intro" : undefined} key={paragraph}>{paragraph}</p>)}</div> : <div className="about-description"><p>Здесь будет несколько слов обо мне, моём подходе к монтажу и работе с проектами.</p><TextLines lines={2} /></div>}
         <a className="button button-primary" href="#contact">Обсудить проект<ArrowUpRight size={18} aria-hidden="true" /></a>
-      </div><div className="portrait-placeholder" role="img" aria-label="Место для портрета Алексея"><span className="portrait-label eyebrow">ПОРТРЕТ / 4:5</span><UserRound size={64} strokeWidth={.8} aria-hidden="true" /><span className="portrait-caption">Фото появится здесь</span></div></div>
-      <div className="about-details">{[{ title: "Навыки", items: about.skills }, { title: "Инструменты", items: about.tools }, { title: "Платформы", items: about.platforms }].map((detail, index) => <div key={detail.title}><h3><span>{String(index + 1).padStart(2, "0")}</span>{detail.title}</h3>{detail.items.length ? <p>{detail.items.join(" / ")}</p> : <TextLines lines={1} />}</div>)}</div>
+      </div><div className="portrait-placeholder"><Image src="/media/alexey.jpg" alt="Алексей — видеомонтажёр" fill sizes="(max-width: 599px) 350px, 412px" className="portrait-photo" /></div></div>
+      <div className="about-details">{[{ title: "Навыки", items: about.skills }, { title: "Инструменты", items: about.tools }, { title: "Платформы", items: about.platforms }].map((detail, index) => <div key={detail.title}><h3><span>{String(index + 1).padStart(2, "0")}</span>{detail.title}</h3>{detail.items.length ? <ul className="about-icons" aria-label={detail.title}>{detail.items.map(icon => <li key={icon.name} title={icon.name}><Image src={icon.src} alt={icon.name} width={40} height={40} className="about-icon" /></li>)}</ul> : <TextLines lines={1} />}</div>)}</div>
     </div>
   </section>;
 }
@@ -20,7 +21,7 @@ export function Reviews() {
     <Carousel className="reviews" label="Отзывы" count={reviews.length} toolbar={<SectionHeading id="reviews-title" label="04 / ОБРАТНАЯ СВЯЗЬ" title="Отзывы клиентов" />}>
     {reviews.map(review => <article className="review-card" key={review.id}>
       <span className="quote-mark" aria-hidden="true">“</span>{review.quote ? <blockquote>{review.quote}</blockquote> : <div className="review-placeholder"><p>Здесь будет отзыв о работе</p><TextLines lines={3} /></div>}
-      <div className="review-author"><span className="avatar-placeholder"><UserRound size={18} aria-hidden="true" /></span><div><p>{review.author ?? "Имя клиента"}</p>{review.detail && <span>{review.detail}</span>}</div>{review.url ? <a href={review.url} target="_blank" rel="noopener noreferrer" aria-label={`Источник отзыва ${review.author ?? "клиента"}`}><ArrowUpRight size={18} aria-hidden="true" /></a> : null}</div>
+      <div className="review-author"><span className="avatar-placeholder">{review.avatar ? <Image src={review.avatar} alt="" width={36} height={36} /> : <UserRound size={18} aria-hidden="true" />}</span><div><p>{review.author ?? "Имя клиента"}</p>{review.detail && <span>{review.detail}</span>}</div>{review.url ? <a href={review.url} target="_blank" rel="noopener noreferrer" aria-label={`Источник отзыва ${review.author ?? "клиента"}`}><ArrowUpRight size={18} aria-hidden="true" /></a> : null}</div>
     </article>)}
     </Carousel>
   </div></section>;

@@ -1,5 +1,5 @@
 import { ArrowDown } from "lucide-react";
-import { showreel } from "@/data/content";
+import { showreel, site } from "@/data/content";
 import { Header } from "./navigation";
 import { SectionHeading, TextLines } from "./ui";
 import { Showreel } from "./video-card";
@@ -11,6 +11,7 @@ export function Hero() {
     <Header /><div className="hero-content container">
       <p className="eyebrow">ПОРТФОЛИО / VIDEO EDITOR</p><h1 className="display" id="hero-title">Видеомонтажёр</h1>
       <TextLines className="hero-description" />
+      <a className="hero-mobile-contact link-muted" href={`mailto:${site.email}`}>{site.email}</a>
       <div className="showreel"><Showreel item={showreel} /></div>
       <a className="hero-next eyebrow" href="#works">ИЗБРАННЫЕ РАБОТЫ<ArrowDown size={16} aria-hidden="true" /></a>
     </div>

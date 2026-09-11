@@ -37,8 +37,8 @@ CONFIG
 ssh -F "$ssh_dir/config" timeweb-deploy "test -d '$TIMEWEB_PATH' && test -w '$TIMEWEB_PATH'"
 # No --delete: a deployment must not remove hosting files or certificate data.
 # Upload versioned assets before documents which reference them.
-rsync -rltz --delay-updates --chmod=D755,F644 --exclude='*.html' \
+rsync -rlptz --delay-updates --chmod=D755,F644 --exclude='*.html' \
   -e "ssh -F \"$ssh_dir/config\"" out/ "timeweb-deploy:${TIMEWEB_PATH%/}/"
-rsync -rltz --delay-updates --chmod=D755,F644 --include='*/' --include='*.html' --exclude='*' \
+rsync -rlptz --delay-updates --chmod=D755,F644 --include='*/' --include='*.html' --exclude='*' \
   -e "ssh -F \"$ssh_dir/config\"" out/ "timeweb-deploy:${TIMEWEB_PATH%/}/"
 echo 'Static site uploaded. Check / and /en/ on the hosting domain.'

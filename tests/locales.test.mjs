@@ -16,10 +16,12 @@ for (const page of pages) {
     assert.ok(text.includes(page.about));
     assert.ok(text.includes(page.category));
     assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
-    const languageLink = html.match(/<a\b[^>]*class="language-button"[^>]*>/)?.[0];
-    assert.ok(languageLink, "Language switch must be a native link");
-    assert.ok(languageLink.includes(`href="${page.other}"`));
-    assert.ok(!languageLink.includes("disabled"));
+    assert.match(html, /<details[^>]*class="language-picker"/);
+    assert.match(html, /<summary[^>]*class="language-button"/);
+    const languageLinks = [...html.matchAll(/<a\b[^>]*class="language-option"[^>]*>/g)].map(match => match[0]);
+    assert.equal(languageLinks.length, 2);
+    assert.ok(languageLinks.some(link => link.includes(`href="${page.other}"`)));
+    assert.equal(languageLinks.filter(link => link.includes('aria-current="page"')).length, 1);
     for (const id of ["works", "shorts", "about", "reviews", "contact"]) {
       assert.ok(html.includes(`id="${id}"`), `Missing section: ${id}`);
     }
@@ -30,7 +32,7 @@ for (const page of pages) {
       assert.ok(existsSync(resolve("out", decodeURIComponent(match[1].slice(1)))), `Missing asset: ${match[1]}`);
     }
     if (page.locale === "en") {
-      assert.doesNotMatch(text, /[А-Яа-яЁё]/, "English page has untranslated visible Russian text");
+      assert.doesNotMatch(text.replace("Русский", ""), /[А-Яа-яЁё]/, "English page has untranslated visible Russian text");
       assert.ok(text.includes("I turn raw footage into stories"));
       assert.ok(text.includes("Our views and engagement have increased"));
     }

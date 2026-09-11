@@ -3,7 +3,7 @@ import { about, reviews, shorts, showreel, site, works } from "./content";
 export type Locale = "ru" | "en";
 const ru = {
   skip: "Перейти к работам", home: "Алексей — на главную", navigation: "Основная навигация", mobileNavigation: "Мобильная навигация", footerNavigation: "Навигация в подвале",
-  switchLanguage: "Switch to English", openMenu: "Открыть меню", closeMenu: "Закрыть меню",
+  switchLanguage: "Выбрать язык", openMenu: "Открыть меню", closeMenu: "Закрыть меню",
   heroLabel: "ПОРТФОЛИО / VIDEO EDITOR", profession: "Видеомонтажёр", selected: "Избранные работы", portfolioLabel: "ПОРТФОЛИО", videoLabel: "ВИДЕО / 16:9",
   vertical: "Вертикальные видео", aboutLabel: "ОБО МНЕ", aboutTitle: "О себе", discuss: "Обсудить проект", portrait: "Алексей — видеомонтажёр",
   aboutPlaceholder: "Здесь будет несколько слов обо мне, моём подходе к монтажу и работе с проектами.", skills: "Навыки", tools: "Инструменты", platforms: "Платформы",
@@ -16,7 +16,7 @@ const ru = {
 export type Messages = typeof ru;
 const en: Messages = {
   skip: "Skip to work", home: "Aleksei — home", navigation: "Main navigation", mobileNavigation: "Mobile navigation", footerNavigation: "Footer navigation",
-  switchLanguage: "Переключить на русский", openMenu: "Open menu", closeMenu: "Close menu",
+  switchLanguage: "Choose language", openMenu: "Open menu", closeMenu: "Close menu",
   heroLabel: "PORTFOLIO / VIDEO EDITOR", profession: "Video Editor", selected: "Selected work", portfolioLabel: "PORTFOLIO", videoLabel: "VIDEO / 16:9",
   vertical: "Vertical videos", aboutLabel: "ABOUT ME", aboutTitle: "About me", discuss: "Discuss a project", portrait: "Aleksei — video editor",
   aboutPlaceholder: "A few words about me, my editing approach and how I work on projects.", skills: "Skills", tools: "Tools", platforms: "Platforms",

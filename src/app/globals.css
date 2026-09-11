@@ -84,7 +84,7 @@ svg { flex-shrink: 0; }
 .language-button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 32px; width: 75px; border: 1px solid var(--color-line); border-radius: 18px; font-size: 12px; color: var(--color-muted); background: var(--color-surface); }
 .hero-content { text-align: center; padding-top: 57px; }
 .hero-content h1 { margin-top: 16px; }
-.hero-description { width: min(560px, 100%); margin: 24px auto 44px; font-size: 18px; line-height: 28px; color: var(--color-muted); text-wrap: balance; }
+.hero-description { width: min(816px, 100%); margin: 24px auto 44px; font-size: 18px; line-height: 28px; color: var(--color-muted); text-wrap: balance; }
 .showreel { width: min(816px, 100%); margin-inline: auto; }
 .hero-next { display: flex; justify-content: center; align-items: center; gap: 14px; width: fit-content; margin: 27px auto 0; padding: 12px; font-size: 12px; }
 .hero-next:hover { color: white; }

@@ -45,8 +45,9 @@ export const reviews: Review[] = [
   { id: "review-3", quote: "Вау, это очень классно! У нас поднялись просмотры и вовлечённость.", author: "Ирина Азарова", detail: null, url: null, avatar: "/media/review-irirna.jpg" },
 ];
 export type AboutIcon = { name: string; src: string };
-export const about: { text: string | null; skills: AboutIcon[]; tools: AboutIcon[]; platforms: AboutIcon[] } = {
+export const about: { text: string | null; portrait?: string | null; skills: AboutIcon[]; tools: AboutIcon[]; platforms: AboutIcon[] } = {
   text: "Профессиональный видеомонтажёр с 7-летним опытом.\nНа этом канале вы можете увидеть мои работы, а возможно, и влоги или руководства.\nСейчас я собираю креативные ролики в DaVinci Resolve, раньше много работал в Adobe Premiere Pro и немного в After Effects. Motion-графику в основном делаю в DaVinci Resolve Fusion, некоторые задачи — в After Effects.\nСайты пока пишу на HTML, CSS и JavaScript.",
+  portrait: "/media/alexey.jpg",
   skills: [
     { name: "HTML", src: "/media/icon/image 8.png" },
     { name: "CSS", src: "/media/icon/image 9.png" },

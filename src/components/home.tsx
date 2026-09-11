@@ -1,12 +1,13 @@
-import { getCopy, type Locale } from "@/data/translations";
+import type { Locale } from "@/data/translations";
+import { getSiteCopy } from "@/sanity/content";
 import { LanguageProvider } from "./language-provider";
 import { Hero, ShortsLibrary, WorkLibrary } from "@/components/portfolio";
 import { About, Contact, Footer, Reviews } from "@/components/sections";
 import { VideoProvider } from "@/components/video-player";
 import { BackgroundMotion } from "@/components/background-motion";
 
-export function Home({ locale }: { locale: Locale }) {
-  const copy = getCopy(locale);
+export async function Home({ locale }: { locale: Locale }) {
+  const copy = await getSiteCopy(locale);
   return <LanguageProvider copy={copy}><div className="site-shell" id="top">
     <a className="skip-link button button-primary" href="#works">{copy.ui.skip}</a>
     <BackgroundMotion />

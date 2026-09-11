@@ -12,7 +12,7 @@ export function About({ copy }: { copy: SiteCopy }) {
         <SectionHeading id="about-title" label={`03 / ${ui.aboutLabel}`} title={ui.aboutTitle} /><h3>{site.name}</h3>
         {about.text ? <div className="about-description">{about.text.split("\n").map((paragraph, index) => <p className={index === 0 ? "about-intro" : undefined} key={paragraph}>{paragraph}</p>)}</div> : <div className="about-description"><p>{ui.aboutPlaceholder}</p><TextLines lines={2} /></div>}
         <a className="button button-primary" href="#contact">{ui.discuss}<ArrowUpRight size={18} aria-hidden="true" /></a>
-      </div><div className="portrait-placeholder"><Image src="/media/alexey.jpg" alt={ui.portrait} fill sizes="(max-width: 599px) 350px, 412px" className="portrait-photo" /></div></div>
+      </div><div className="portrait-placeholder">{about.portrait ? <Image src={about.portrait} alt={ui.portrait} fill sizes="(max-width: 599px) 350px, 412px" className="portrait-photo" /> : null}</div></div>
       <div className="about-details">{[{ title: ui.skills, items: about.skills, Icon: CodeXml }, { title: ui.tools, items: about.tools, Icon: Wrench }, { title: ui.platforms, items: about.platforms, Icon: PanelsTopLeft }].map(({ title, items, Icon }) => <div key={title}><h3><Icon size={18} strokeWidth={1.6} aria-hidden="true" />{title}</h3>{items.length ? <ul className="about-icons" aria-label={title}>{items.map(icon => <li key={icon.name} title={icon.name}><Image src={icon.src} alt={icon.name} width={40} height={40} className="about-icon" /></li>)}</ul> : <TextLines lines={1} />}</div>)}</div>
     </div>
   </section>;
